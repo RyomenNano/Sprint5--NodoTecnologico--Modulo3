@@ -1,0 +1,31 @@
+{
+  "name": "tp-final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.mjs",
+  "scripts": {
+    "start": "node src/app.mjs",
+    "dev": "nodemon src/app.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyomenNano/Sprint5--NodoTecnologico--Modulo3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyomenNano/Sprint5--NodoTecnologico--Modulo3/issues"
+  },
+  "homepage": "https://github.com/RyomenNano/Sprint5--NodoTecnologico--Modulo3#readme",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-validator": "^7.3.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.0.0"
+  }
+}
