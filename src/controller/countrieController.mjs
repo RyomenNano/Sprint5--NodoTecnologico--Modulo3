@@ -97,7 +97,7 @@ export async function crearNuevoPaisController(req, res){
 // Controller para modificar los datos de un pais ya existente
 export async function actualizarPaisController(req, res){
     try {
-        // Guardamos los datos del formulario y el id que nos da la url
+        // Guardamos los datos del formulario y el ID que nos da la URL
         const data= req.body;
         const {id}= req.params;
         
@@ -113,22 +113,24 @@ export async function actualizarPaisController(req, res){
 // Controller para recibir un ID y llamar al servicio para eliminar un pais
 export async function eliminarPaisPorIDController(req, res){
         try {
-        const {id}= req.params;
-        const paisEliminado = await eliminarPaisPorID(id);
-        if (paisEliminado){
-            res.redirect('/dashboard');
-        }
+            //Obtenemos el ID de la URl, llamamos al servicio, al eleiminar, se espera un resultado, si éxiste entonces se redirige al dashboard
+            const {id}= req.params;
+            const paisEliminado = await eliminarPaisPorID(id);
+            if (paisEliminado){
+                res.redirect('/dashboard');
+            }
     } catch (error) {
         res.status(500).send({mensaje: 'Error al eliminar pais', error: error.message})
     }
 }
 
-
+// Controller para obtener pais por su ID, función necesaria para editar paises
 export async function obtenerPorIDController(req,res){
     try {
-        const {id} = req.params;
+        // Se obtiene el ID y se llama al servicio obtenerPorID enviandole el id obtenido
         const pais = await obtenerPorID(id);
         if (pais){
+            // Si éxiste resultado, redirige al formulario para editar paises, enviandole los datos del pais solicitado
             res.render("editCountry", { pais });
         }
     } catch (error) {
@@ -136,8 +138,10 @@ export async function obtenerPorIDController(req,res){
     }
 }
 
+// Controller para cargar la API entera en la base de datos
 export async function cargarApiController(req,res){
     try {
+        // Llamamos al servicio para cargar la API y redirige al dashboard
         await cargarApi();
         res.redirect('/dashboard');
     } catch (error) {
@@ -145,8 +149,10 @@ export async function cargarApiController(req,res){
     }
 }
 
+// Controller para borrar todos los datos de la base de daots (Incluyendo tanto los datos de la API como las creadas por el usuario)
 export async function borrarDatosController(req,res){
     try {
+        // Llamamos al servicio de borrar y redirigimos al dashboard
         await borrarDatos();
         res.redirect('/dashboard');
     } catch (error) {
