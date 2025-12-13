@@ -41,7 +41,7 @@ class PaisRepository extends IRepository{
     }
 
     async cargarApi(paisesTransformados) {
-        return await pais.upsert(paisesTransformados);
+        return await pais.insertMany(paisesTransformados);
     }
 
     async borrarDatos(){
