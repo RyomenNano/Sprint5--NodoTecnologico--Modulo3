@@ -1,11 +1,15 @@
 import PaisRepository from "../repository/paisRepository.mjs";
 import axios from "axios";
 
+// Servicio para obtener todos los paises (usados para el dashboard y crear el CSV)
 export async function obtenerTodosLosPaises(){
+    // Llamamos al metodo del repositorio para obtener los paises
     return await PaisRepository.obtenerPaises();
 }
 
+// Servicio para crear nuevo pais (usado por crear nuevo pais)
 export async function crearNuevoPais(data){
+    // Creamos un array que acomoda todos los datos recibidos del formulario de addCountry
     const datos={
         "nombrePais": data.nombrePais || "",
         "nombreCapital": data.nombreCapital || [],
@@ -18,12 +22,15 @@ export async function crearNuevoPais(data){
         "bandera": data.bandera || [],
         "zonasHorarias": data.zonasHorarias || [],
         "creador": data.creador
+        // Si no éxiste datos, se los remplaza por un valor vacío válido para el tipo de dato
         }
-
-    return await PaisRepository.crearPais(datos)
+    // Se llama al metodo crearPais del repositorio y se le envia los datos
+    return await PaisRepository.crearPais(datos);
 }
 
+// Servicio para actualizar pais (Usado por actualizarPais)
 export async function actualizarPais(data, id){
+    // Se arma un array nuevo con todos los datos del formulario de editCountry tanto los originales como los modificados
     const datosActualizados={
         "nombrePais": data.nombrePais || "",
         "nombreCapital": data.nombreCapital || [],
@@ -37,11 +44,13 @@ export async function actualizarPais(data, id){
         "zonasHorarias": data.zonasHorarias || [],
         "creador": data.creador || "Desconocido"
         }
-
+    // Se llama al metodo de actualizar y se le envia los datos y el ID
     return await PaisRepository.actualizarPais(datosActualizados, id);
 }
 
+// Servicio para borrar pais usado por eliminarPais
 export async function eliminarPaisPorID(id){
+    // Se llama al metodo y se le envia el ID recibido por el controller
     return await PaisRepository.borrarPaisPorID(id);
 } 
 

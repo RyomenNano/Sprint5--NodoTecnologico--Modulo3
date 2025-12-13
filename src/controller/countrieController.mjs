@@ -32,7 +32,6 @@ export async function obtenerTodosLosPaisesController(req, res){
 export async function exportarListaDePaisesController(req, res){
 
     try {
-
         // Llamamos al servicio para obtener los paises
         const paises = await obtenerTodosLosPaises();
 
