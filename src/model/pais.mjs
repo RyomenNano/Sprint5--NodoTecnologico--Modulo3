@@ -2,10 +2,13 @@ import mongoose from 'mongoose';
 
 const paisSchema= new mongoose.Schema({
     nombrePais:{type: String, required: true},
-    nombreCapital:{type: String, required: true},
+    nombreCapital:[String],
+    area:{type: Number, min:0},
     poblacion:{type:Number, min:0},
-    continente:{type: String},
-    lenguajesHabaldos:[String],
+    region:{type: String},
+    bordes:[String],
+    gini:[String],
+    lenguajesHablados:[String],
     bandera:[String],
     zonasHorarias:[String],
     creador: String,

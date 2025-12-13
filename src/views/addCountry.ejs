@@ -1,0 +1,50 @@
+<form action="/pais/agregar" method="POST" class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg shadow">
+
+    <label class="text-gray-300 font-medium">Nombre del País:</label><br>
+    <input type="text" name="nombrePais" required class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Nombre de la Capital (separar por coma en caso de ser más de uno):</label><br>
+    <input type="text" name="nombreCapital" required class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br> 
+
+    <label class="text-gray-300 font-medium">Área cubierta:</label><br>
+    <input type="number" name="area" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br> 
+
+    <label class="text-gray-300 font-medium">Población:</label><br>
+    <input type="number" name="poblacion" min="0" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Región:</label><br>
+    <input type="text" name="region" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Fronteras (separar por coma):</label><br>
+    <input type="text" name="bordes" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Porcentaje gini:</label><br>
+    <input type="number" step="any" name="gini" max="100" min="0" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Ídiomas hablados(separar por coma):</label><br>
+    <input type="text" name="lenguajesHablados" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Banderas (link):</label><br>
+    <input type="text" name="bandera" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Zonas Horarias (separadas por coma):</label><br>
+    <input type="text" name="zonasHorarias" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Creador:</label><br>
+    <input type="text" name="creador" class="w-full mt-1 mb-6 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded shadow">
+        Crear País
+    </button>
+</form>

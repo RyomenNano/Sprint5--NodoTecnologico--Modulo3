@@ -1,0 +1,50 @@
+<form action="/pais/<%= pais._id %>/editar?_method=PUT" method="POST" class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg shadow">
+
+    <label class="text-gray-300 font-medium">Nombre del País:</label><br>
+    <input type="text" value="<%= pais.nombrePais %>" name="nombrePais" required class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Nombre de la Capital:</label><br>
+    <input type="text" value="<%= pais.nombreCapital %>" name="nombreCapital" required class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Área:</label><br>
+    <input type="number" value="<%= pais.area %>" name="area" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br> 
+
+    <label class="text-gray-300 font-medium">Población:</label><br>
+    <input type="number" value="<%= pais.poblacion %>" name="poblacion" min="0" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Región:</label><br>
+    <input type="text" value="<%= pais.region %>" name="region" placeholder="" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Fronteras (separar por coma):</label><br>
+    <input type="text" value="<%= pais.bordes %>" name="bordes" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Porcentaje gini: (colocar 0 si no tiene datos)</label><br>
+    <input type="number" step="any" value="<%= pais.gini %>"  name="gini" max="100" min="0" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Idiomas hablados (separados por coma):</label><br>
+    <input type="text" value="<%= pais.lenguajesHablados %>" name="lenguajesHablados" placeholder="" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Banderas (link):</label><br>
+    <input type="text" value="<%= pais.bandera %>" name="bandera" placeholder="" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Zonas Horarias (separados por coma):</label><br>
+    <input type="text" value="<%= pais.zonasHorarias %>" name="zonasHorarias" placeholder="" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <label class="text-gray-300 font-medium">Creador:</label><br>
+    <input type="text" value="<%= pais.creador %>" name="creador" class="w-full mt-1 mb-6 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <br>
+
+    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded shadow">
+        Actualizar Pais
+    </button>
+</form>

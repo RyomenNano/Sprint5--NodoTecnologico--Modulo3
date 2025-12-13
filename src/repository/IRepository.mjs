@@ -20,7 +20,13 @@ class IRepository{
         throw new Error("Método 'obtenerPorID()' no implementado");
     }
 
+    cargarApi(){
+        throw new Error("Método 'cargarApi()' no implementado");
+    }
 
+    borrarDatos(){
+        throw new Error("Método 'borrarDatos()' no implementado")
+    }
 }
 
 export default IRepository;
