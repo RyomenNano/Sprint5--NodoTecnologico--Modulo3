@@ -6,11 +6,11 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
     <nav><%- include('partials/navbar.ejs') %></nav>
 
-    <main><%- body %></main>
-
+    <main class="flex-grow"><%- body %></main>
+    <br>
     <footer><%- include('partials/footer.ejs') %></footer>
 </body>
 </html>
