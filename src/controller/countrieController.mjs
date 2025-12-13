@@ -1,20 +1,25 @@
 import {obtenerTodosLosPaises, obtenerPorID, crearNuevoPais, actualizarPais, eliminarPaisPorID, cargarApi, borrarDatos} from '../services/countriesService.mjs';
 
+// Función para obtener todos los paises y cargarlos en el dashboard
 
 export async function obtenerTodosLosPaisesController(req, res){ 
     try {
+        // Llama al servicio para obtener la lista
         const paises = await obtenerTodosLosPaises();
 
+        // Suma la cantidad de habitantes de cada país
         const totalPoblacion = paises.reduce((i, p) => i + (p.poblacion || 0), 0);
-
+        // Suma la cantidad de área que cubre cada país
         const totalArea = paises.reduce((i, p) => i + (p.area || 0), 0);
-
+        // Filtra los gini que sean null/NaN y les asigna valor 0
         const giniValores = paises.map(p => {
             const valor = Number(p.gini);
             return isNaN(valor) ? 0 : valor;
         });
-
+        // Calcula el porcentaje promedio de todos los gini de cada país (contando los que no tienen datos)
         const promedioGini = giniValores.reduce((i, g) => i + g, 0) / giniValores.length;
+
+        // Renderizamos el dashboard llevandole todos los datos y redondeando el resultado de gini a 2 decimales
 
         res.render("dashboard", { paises, totalPoblacion, totalArea, promedioGini: promedioGini.toFixed(2) });
 
