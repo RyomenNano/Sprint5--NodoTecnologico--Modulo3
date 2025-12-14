@@ -24,7 +24,6 @@ export async function crearNuevoPais(data){
         "creador": data.creador
         // Si no éxiste datos, se los remplaza por un valor vacío válido para el tipo de dato
         }
-    // Se llama al metodo crearPais del repositorio y se le envia los datos
     return await PaisRepository.crearPais(datos);
 }
 
@@ -44,28 +43,30 @@ export async function actualizarPais(data, id){
         "zonasHorarias": data.zonasHorarias || [],
         "creador": data.creador || "Desconocido"
         }
-    // Se llama al metodo de actualizar y se le envia los datos y el ID
     return await PaisRepository.actualizarPais(datosActualizados, id);
 }
 
 // Servicio para borrar pais usado por eliminarPais
 export async function eliminarPaisPorID(id){
-    // Se llama al metodo y se le envia el ID recibido por el controller
     return await PaisRepository.borrarPaisPorID(id);
 } 
 
+// Servicio para obtener por ID, necesario para editar paises
 export async function obtenerPorID(ID){
     return await PaisRepository.obtenerPorID(ID);
 }
 
+// Servicio para cargar la API en la base de datos
 export async function cargarApi(){
-
+    // Obtenemos la API y la guardamos 
     const url = "https://restcountries.com/v3.1/region/america";
     const res = await axios.get(url);
     let paises = res.data;
 
+    // Filtramos unicamente los paises que su propiedad languages tenga "spa" entre ellos
     paises = paises.filter(p => p.languages?.spa);
 
+    // Creamos el array y lo vinculamos con cada propiedad que necesitamos del array completo
     const paisesTransformados = paises.map(p => ({
         nombrePais: p.name?.common ?? "",
         nombreCapital: p.capital ?? "Sin capital",
@@ -73,18 +74,23 @@ export async function cargarApi(){
         poblacion: p.population ?? 0,
         region: p.region ?? "",
         bordes: p.borders ?? [],
+        // Evaluamos el año más alto y tomamos su porcentaje gini
         gini: p.gini ? p.gini[Math.max(...Object.keys(p.gini))] : [null],
+        // Tomamos solo el código de languagues y lo devolvemos formateados a mayusculas
         lenguajesHablados: p.languages ? Object.keys(p.languages).map(Codigo=> Codigo.toUpperCase()) : [],
+        // Si éxiste la bandera en formato .png, tomamos ese valor, sino, consultamos el formato .svg
         bandera: [p.flags?.png ?? p.flags?.svg ?? ""],
         zonasHorarias: p.timezones ?? [],
+        // A los objetos obtenidos se le adjudica el derecho de creación a Restcountries.com
         creador: "Restcountries.com"
+        // En caso de que haga falta valor, se le asigna valor vacío válido
     }));
 
     await PaisRepository.cargarApi(paisesTransformados);
-
     return paisesTransformados;
 }
 
+// Servicio para borrar datos de la base de datos 
 export async function borrarDatos(){
     return await PaisRepository.borrarDatos()
 }

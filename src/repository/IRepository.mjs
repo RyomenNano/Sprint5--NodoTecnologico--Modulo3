@@ -1,3 +1,4 @@
+// Defino los métodos que deben estar implementados
 class IRepository{
 
     obtenerPaises(){

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+// La estructura que deben tener todos los paises
 const paisSchema= new mongoose.Schema({
     nombrePais:{type: String, required: true},
     nombreCapital:[String],
