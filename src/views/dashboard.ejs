@@ -1,7 +1,8 @@
 <div class="p-2">
-        
+        <!-- Tabla que contiene los paises -->
         <table class="min-w-full border border-gray-300 text-sm text-left">
             <thead>
+                <!-- Encabezado -->
                 <tr class="bg-gray-100 border-b border-gray-300">
                     <th class="p-2 font-semibold">País</th>
                     <th class="p-2 font-semibold">Capital</th>
@@ -20,6 +21,7 @@
             </thead>
         
             <tbody>
+                <!-- Cuerpo, cada pais se rellena con las propiedades del array enviado-->
                 <% paises.forEach(pais => { %>
                 <tr class="border-b border-gray-300 hover:bg-gray-50">
                     <td class="p-2"><%= pais.nombrePais %></td>
@@ -34,11 +36,13 @@
                     <td class="p-2"><%= pais.zonasHorarias %></td>
                     <td class="p-2"><%= pais.creador %></td>
                     <td class="p-2">
+                        <!--Boton para editar país-->
                         <form action="/pais/<%= pais._id %>/editar" width="5%" method="GET" class="inline">
                             <button type="submit" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Editar</button>
                         </form>
                     </td>
                     <td class="p-2">
+                        <!-- Boton para eliminar país -->
                         <form action="pais/<%= pais._id %>?_method=DELETE" method="POST" class="inline">
                             <button type="submit" onclick="return confirm('¿Seguro que querés eliminar este héroe?')" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Eliminar</button>
                         </form>
@@ -46,7 +50,7 @@
                 </tr>
                 <% }) %>
             </tbody>
-
+            <!-- Píe de tabla donde damos los resultados de algunos campos fusionados-->
             <tfoot>
                 <tr class="border-b border-gray-300 hover:bg-gray-50">
                     <td class="p-2">-</td>
@@ -63,6 +67,7 @@
                     <td class="p-2">-</td>
                     <td class="p-2">-</td>
                 </tr>
+                <!-- Los resultados-->
                 <tr class="border-b border-gray-300 hover:bg-gray-50">
                     <td class="p-2">-</td>
                     <td class="p-2">-</td>
@@ -81,6 +86,7 @@
             </tfoot>
         </table>
     <br>
+    <!-- Boton para exportar -->
     <form action="/dashboard/exportar" method="GET">
         <button class="ml-6 bg-blue-500 text-white px-4 py-2 rounded">
             Exportar CSV

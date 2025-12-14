@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Importamos la API de tailwindcss directamente del link-->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen flex flex-col">
+    <!-- La barra de navegación -->
     <nav><%- include('partials/navbar.ejs') %></nav>
 
+    <!-- El cuerpo de la página -->
     <main class="flex-grow"><%- body %></main>
     <br>
+    <!-- El píe de la página-->
     <footer><%- include('partials/footer.ejs') %></footer>
 </body>
 </html>
