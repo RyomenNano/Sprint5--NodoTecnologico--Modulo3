@@ -37,12 +37,14 @@ export const FormularioValidationRules = ()=>[
     .trim()
     .isInt({min: 1}).withMessage("El campo area no puede tener valor 0 o valor negativo"),
 
+    // La cantidad de población debe éxistir, no estar vacía, y ser un numero entero siendo su cantidad mínima 0 (Contemplo la posibilidad de incluir paises que no éxisten)
     body('poblacion')
     .exists().withMessage("El campo población es inexistente")
     .notEmpty().withMessage("El campo población está vacío")
     .trim()
     .isInt({min: 0}).withMessage("El campo población no puede tener valores negativos"),
-
+    
+    // El porcentaje gini debe éxistir y ser un numero flotante (decimal) entre 0 a 100 (representando el porcentaje de 0% a 100%)
     body('gini')
     .exists().withMessage("El campo gini es inexistente")
     .isFloat({min: 0, max: 100}).withMessage("El campo gini debe tener un porcentaje entre 0% al 100%"),
