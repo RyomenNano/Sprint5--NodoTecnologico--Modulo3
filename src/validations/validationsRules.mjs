@@ -22,10 +22,9 @@ export const FormularioValidationRules = ()=>[
     // Los paises fronterizos deben éxistir y ser un array con mínimo 0 elementos (porque hay paises que son islas, sin paises vecinos)
     body('bordes')
     .exists().withMessage("El campo bordes es inexistente")
-    .isArray({ min: 0 })
-    .optional({ checkFalsy: true }),
+    .isArray({ min: 0 }),
 
-    // Cada elemento de los paises fronterizos deben tener caracteres del A a la Z y tener 3 caracteres (la forma estandar dek código ISO 3166-1 alpha-3 para referirse a paises)
+    // Cada elemento de los paises fronterizos (bordes) deben tener caracteres del A a la Z y tener 3 caracteres (la forma estandar del código ISO 3166-1 alpha-3 para referirse a paises)
     body('bordes.*')
     .matches(/^[A-Z]{3}$/).withMessage("El campo bordes solo admite 3 letras "),
 
