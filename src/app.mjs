@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(expressLayouts)
-app.use(express.static("zPublic"));
+app.use(express.static("./src/public"));
 
 // La página principal sera "layout"
 app.set('layout', 'layout')

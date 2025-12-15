@@ -25,7 +25,7 @@
     <br>
     <!-- Porcentaje Gini -->
     <label class="text-gray-300 font-medium">Porcentaje gini: (colocar 0 si no tiene datos)</label><br>
-    <input type="number" step="any" value="<%= pais.gini %>"  name="gini" max="100" min="0" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <input type="number" step="any" value="<%= pais.gini.length > 0 ? pais.gini[0] : 0 %>"  name="gini" max="100" min="0" class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
     <br>
     <!-- Idiomas -->
     <label class="text-gray-300 font-medium">Idiomas hablados (separados por coma):</label><br>

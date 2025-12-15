@@ -104,6 +104,7 @@ export async function eliminarPaisPorIDController(req, res){
 export async function obtenerPorIDController(req,res){
     try {
         // Se obtiene el ID y se llama al servicio obtenerPorID enviandole el id obtenido
+        const {id} = req.params;
         const pais = await obtenerPorID(id);
         if (pais){
             // Si éxiste resultado, redirige al formulario para editar paises, enviandole los datos del pais solicitado

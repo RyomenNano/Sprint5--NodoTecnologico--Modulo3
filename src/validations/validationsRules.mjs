@@ -13,7 +13,6 @@ export const FormularioValidationRules = ()=>[
     // Válidamos que éxista, que no esté vacío y que sea un array con mínimo 0 elementos (esto porque éxisten paises sin capital)
     body('nombreCapital')
     .exists().withMessage("El campo nombre capital es inexistente")
-    .notEmpty().withMessage("El campo nombre capital está vacio")
     .isArray({ min: 0 }),
 
     // Cada elemento de nombreCapital debera tener una cantidad de caracteres entre 3 a 90
@@ -23,18 +22,16 @@ export const FormularioValidationRules = ()=>[
     // Los paises fronterizos deben éxistir y ser un array con mínimo 0 elementos (porque hay paises que son islas, sin paises vecinos)
     body('bordes')
     .exists().withMessage("El campo bordes es inexistente")
-    .isArray({ min: 0 }),
+    .isArray({ min: 0 })
+    .optional({ checkFalsy: true }),
 
     // Cada elemento de los paises fronterizos deben tener caracteres del A a la Z y tener 3 caracteres (la forma estandar dek código ISO 3166-1 alpha-3 para referirse a paises)
     body('bordes.*')
-    .matches(/^[A-Z]{3}$/).withMessage("El campo bordes solo admite 3 letras ")
-    .optional({ checkFalsy: true }),
+    .matches(/^[A-Z]{3}$/).withMessage("El campo bordes solo admite 3 letras "),
 
     // Cada área debe éxistir, no estar vacía, y se elimina los espacios, ademas, se válida que sea un numero entero con valor mínimo 1 (porque un país no puede cubir 0 metros o menos)
     body('area')
     .exists().withMessage("El campo area es inexistente")
-    .notEmpty().withMessage("El campo area está vacio")
-    .trim()
     .isInt({min: 1}).withMessage("El campo area no puede tener valor 0 o valor negativo"),
 
     // La cantidad de población debe éxistir, no estar vacía, y ser un numero entero siendo su cantidad mínima 0 (Contemplo la posibilidad de incluir paises que no éxisten)
