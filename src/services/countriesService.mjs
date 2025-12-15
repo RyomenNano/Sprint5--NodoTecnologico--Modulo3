@@ -7,6 +7,73 @@ export async function obtenerTodosLosPaises(){
     return await PaisRepository.obtenerPaises();
 }
 
+export function tPoblacion(lista){
+    // Suma la cantidad de habitantes de cada país
+    return lista.reduce((i, l) => i + (l.poblacion || 0), 0);
+} 
+
+export function tArea(lista){
+    // Suma la cantidad de área que cubre cada país
+    return lista.reduce((i, l) => i + (l.area || 0), 0);
+}
+
+export function pGini(lista){
+    // Filtra los gini que sean null/NaN y les asigna valor 0
+    const giniValores = lista.map(p => {
+        const valor = Number(p.gini);
+        return isNaN(valor) ? 0 : valor;
+    });
+
+    // Calcula el porcentaje promedio de todos los gini de cada país (contando los que no tienen datos)
+    const promedioGini = giniValores.reduce((i, g) => i + g, 0) / giniValores.length;
+    return promedioGini.toFixed(2);
+}
+
+// Lista filtrada segun cierto parámetro
+export async function filtrarLista(atributo, valor){
+    return await PaisRepository.filtrarPaises(atributo, valor);
+}
+ 
+// Servicio para obtener un archivo csv y descargarlo
+export async function armarTablaCSV(){
+    // Llamamos al método para obtener los paises
+        const paises = await PaisRepository.obtenerPaises();
+
+        // Armamos el encabezado para la tabla separados por ;
+        const encabezados = [
+                "NombrePais",
+                "Capital",
+                "Poblacion",
+                "Area",
+                "Region",
+                "Bordes",
+                "Gini",
+                "LenguajesHablados",
+                "Bandera",
+                "ZonasHorarias",
+                "Creador"
+            ].join(";");
+
+        // Construimos cada fila con los datos correspondientes, separados por ;
+        const filas = paises.map(p => [
+                p.nombrePais,
+                p.nombreCapital,
+                p.poblacion,
+                p.area,
+                p.region,
+                p.bordes,
+                p.gini,
+                p.lenguajesHablados,
+                p.bandera,
+                p.zonasHorarias,
+                p.creador
+            ].join(";") );
+
+        // Creamos la tabla uniendo los encabezados y filas, y cada parte se separa por \n
+        const csv = [encabezados, ...filas].join("\n");
+        return csv
+}
+
 // Servicio para crear nuevo pais (usado por crear nuevo pais)
 export async function crearNuevoPais(data){
     // Creamos un array que acomoda todos los datos recibidos del formulario de addCountry

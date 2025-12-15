@@ -5,6 +5,10 @@ class IRepository{
         throw new Error("Método 'obtenerPais()' no implementado");
     }
 
+    filtrarPaises(){
+        throw new Error("Método 'filtrarPais()' no implementado");
+    }
+
     crearPais(){
         throw new Error("Método 'crearPais()' no implementado");
     }

@@ -1,5 +1,5 @@
 import express from "express";
-import {obtenerTodosLosPaisesController, crearNuevoPaisController, actualizarPaisController, eliminarPaisPorIDController, obtenerPorIDController, cargarApiController, borrarDatosController, exportarListaDePaisesController} from "../controller/countrieController.mjs";
+import {obtenerTodosLosPaisesController, crearNuevoPaisController, actualizarPaisController, eliminarPaisPorIDController, obtenerPorIDController, cargarApiController, borrarDatosController, exportarListaDePaisesController, filtrarListaController} from "../controller/countrieController.mjs";
 import {FormularioValidationRules} from "../validations/validationsRules.mjs";
 import {handleValidationErrors} from "../validations/errorMiddleware.mjs";
 import {TransformarCampos} from "../validations/transformacionDeDatos.mjs"
@@ -18,10 +18,11 @@ routes.get('/pais/acercaDe', (req, res) => {res.render("nosotros");});
 routes.get('/pais/cargarApi', cargarApiController);
 routes.get('/pais/eliminarDatos', borrarDatosController);
 
-// Rutas para la lista de paises y otra para exportar está misma lista
+// Rutas para ver la lista de paises, otra para exportar está misma lista y otra para filtar resultados
 
 routes.get('/dashboard', obtenerTodosLosPaisesController);
 routes.get('/dashboard/exportar', exportarListaDePaisesController);
+routes.post('/dashboard/filtrado', filtrarListaController )
 
 // Rutas para enviar los datos al controller mediante POST y otra ruta para ingresar el formulario que contiene esos datos
 

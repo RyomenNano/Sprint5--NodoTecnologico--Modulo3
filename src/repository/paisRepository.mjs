@@ -7,6 +7,11 @@ class PaisRepository extends IRepository{
         return await pais.find({});
     }
 
+    async filtrarPaises(atributo,valor){
+        const filtro = { [atributo]: { $regex: valor, $options: 'i' } };  
+        return await pais.find(filtro);
+    }
+
     // Método donde recibimos el array acomodado y lo insertamos dentro de la base de datos
     async crearPais(data){
         const hero = new pais(data);

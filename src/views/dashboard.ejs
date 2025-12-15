@@ -1,4 +1,24 @@
 <div class="p-2">
+
+    <form action="/dashboard/filtrado" method="POST">
+        <label class="text-gray-300 font-medium">Atributo
+            <select name="atributo">
+                <option value="nombrePais">Nombre del país</option>
+                <option value="nombreCapital">Nombre de la capital</option>
+                <option value="region">Región</option>
+                <option value="bordes">Paises fronterizos</option>
+                <option value="lenguajesHablados">Idiomas hablados</option>
+                <option value="zonasHorarias">Zonas horarias</option>
+                <option value="creador">Creador</option>
+            </select>
+        </label>
+        <label class="text-gray-300 font-medium">si:</label><br>
+        <input type="text" name="valor" required class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <br>
+        <button type="submit" class="ml-6 bg-brown-500 text-black px-4 py-2 rounded">
+            boton
+        </button>
+    </form>
         <!-- Tabla que contiene los paises -->
         <table class="min-w-full border border-gray-300 text-sm text-left">
             <thead>

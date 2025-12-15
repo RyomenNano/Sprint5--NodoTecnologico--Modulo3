@@ -1,4 +1,4 @@
-import {obtenerTodosLosPaises, obtenerPorID, crearNuevoPais, actualizarPais, eliminarPaisPorID, cargarApi, borrarDatos} from '../services/countriesService.mjs';
+import {obtenerTodosLosPaises, obtenerPorID, crearNuevoPais, actualizarPais, eliminarPaisPorID, cargarApi, borrarDatos, armarTablaCSV, filtrarLista, tPoblacion, tArea, pGini} from '../services/countriesService.mjs';
 
 // Controller para obtener todos los paises y cargarlos en el dashboards
 export async function obtenerTodosLosPaisesController(req, res){ 
@@ -6,22 +6,13 @@ export async function obtenerTodosLosPaisesController(req, res){
         // Llama al servicio para obtener la lista
         const paises = await obtenerTodosLosPaises();
 
-        // Suma la cantidad de habitantes de cada país
-        const totalPoblacion = paises.reduce((i, p) => i + (p.poblacion || 0), 0);
-
-        // Suma la cantidad de área que cubre cada país
-        const totalArea = paises.reduce((i, p) => i + (p.area || 0), 0);
-
-        // Filtra los gini que sean null/NaN y les asigna valor 0
-        const giniValores = paises.map(p => {
-            const valor = Number(p.gini);
-            return isNaN(valor) ? 0 : valor;
-        });
-        // Calcula el porcentaje promedio de todos los gini de cada país (contando los que no tienen datos)
-        const promedioGini = giniValores.reduce((i, g) => i + g, 0) / giniValores.length;
+        // Obtenemos cada resultado de 3 servicios dedicados a cada constante
+        const totalPoblacion = tPoblacion(paises);
+        const totalArea = tArea(paises);
+        const promedioGini = pGini(paises)
 
         // Renderizamos el dashboard llevandole todos los datos y redondeando el resultado de gini a 2 decimales
-        res.render("dashboard", { paises, totalPoblacion, totalArea, promedioGini: promedioGini.toFixed(2) });
+        res.render("dashboard", { paises, totalPoblacion, totalArea, promedioGini });
 
     } catch(error){
         res.status(500).send({mensaje: 'Error al obtener los pais', error: error.message})
@@ -32,48 +23,36 @@ export async function obtenerTodosLosPaisesController(req, res){
 export async function exportarListaDePaisesController(req, res){
 
     try {
-        // Llamamos al servicio para obtener los paises
-        const paises = await obtenerTodosLosPaises();
-
-        // Armamos el encabezado para la tabla separados por ;
-        const encabezados = [
-                "NombrePais",
-                "Capital",
-                "Poblacion",
-                "Area",
-                "Region",
-                "Bordes",
-                "Gini",
-                "LenguajesHablados",
-                "Bandera",
-                "ZonasHorarias",
-                "Creador"
-            ].join(";");
-
-        // Construimos cada fila con los datos correspondientes, separados por ;
-        const filas = paises.map(p => [
-                p.nombrePais,
-                p.nombreCapital,
-                p.poblacion,
-                p.area,
-                p.region,
-                p.bordes,
-                p.gini,
-                p.lenguajesHablados,
-                p.bandera,
-                p.zonasHorarias,
-                p.creador
-            ].join(";") );
-
-        // Creamos la tabla uniendo los encabezados y filas, y cada parte se separa por \n
-        const csv = [encabezados, ...filas].join("\n");
+        // Llamamos al servicio para armar la tabla
+        csv = armarTablaCSV();
         
-        // Hacemos que al cargar el archivo, se descargue con el nombre paises.csv y en enviamos la respuesta al cliente
+        // Definimos que al cargar el archivo, se descargue con el nombre paises.csv y en enviamos la respuesta al cliente
         res.setHeader("Content-Disposition", "attachment; filename=paises.csv");
         res.setHeader("Content-Type", "text/csv");
         res.send(csv);
     } catch (error) {
         res.status(500).send("Error al exportar CSV");
+    }
+}
+
+// Controller para obtener lista filtrada de paises
+export async function filtrarListaController(req, res){
+    console.log(req.body);
+    console.log(req.query);
+    try{
+        const {atributo, valor} = req.body;
+        const paises = await filtrarLista(atributo, valor);
+
+        // Obtenemos cada resultado de 3 servicios dedicados a cada constante
+        const totalPoblacion = tPoblacion(paises);
+        const totalArea = tArea(paises);
+        const promedioGini = pGini(paises)
+
+        // Renderizamos el dashboard llevandole todos los datos
+        res.render("dashboard", { paises, totalPoblacion, totalArea, promedioGini });
+    }
+    catch(error){
+        res.status(500).send({mensaje: 'Error al encontrar los paises', error: error.message});
     }
 }
 
