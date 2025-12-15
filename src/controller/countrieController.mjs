@@ -37,8 +37,6 @@ export async function exportarListaDePaisesController(req, res){
 
 // Controller para obtener lista filtrada de paises
 export async function filtrarListaController(req, res){
-    console.log(req.body);
-    console.log(req.query);
     try{
         const {atributo, valor} = req.body;
         const paises = await filtrarLista(atributo, valor);

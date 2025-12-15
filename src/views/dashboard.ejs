@@ -1,23 +1,50 @@
 <div class="p-2">
 
-    <form action="/dashboard/filtrado" method="POST">
-        <label class="text-gray-300 font-medium">Atributo
-            <select name="atributo">
-                <option value="nombrePais">Nombre del país</option>
-                <option value="nombreCapital">Nombre de la capital</option>
-                <option value="region">Región</option>
-                <option value="bordes">Paises fronterizos</option>
-                <option value="lenguajesHablados">Idiomas hablados</option>
-                <option value="zonasHorarias">Zonas horarias</option>
-                <option value="creador">Creador</option>
-            </select>
-        </label>
-        <label class="text-gray-300 font-medium">si:</label><br>
-        <input type="text" name="valor" required class="w-full mt-1 mb-4 p-2 rounded bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <br>
-        <button type="submit" class="ml-6 bg-brown-500 text-black px-4 py-2 rounded">
-            boton
-        </button>
+    <form action="/dashboard/filtrado" method="POST"
+      class="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-3 mb-4">
+
+        <div class="flex items-end gap-4">
+            <!-- Atributo -->
+            <div class="flex flex-col">
+                <label class="text-sm font-semibold text-gray-600 mb-1">
+                    Atributo
+                </label>
+                <select name="atributo"
+                        class="h-9 rounded border border-gray-300 bg-white px-2 text-sm
+                            focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <option value="nombrePais">Nombre del país</option>
+                    <option value="nombreCapital">Nombre de la capital</option>
+                    <option value="region">Región</option>
+                    <option value="bordes">Países fronterizos</option>
+                    <option value="lenguajesHablados">Idiomas hablados</option>
+                    <option value="zonasHorarias">Zonas horarias</option>
+                    <option value="creador">Creador</option>
+                </select>
+            </div>
+
+            <!-- Texto "si:" -->
+            <div class="pb-2 text-sm font-semibold text-gray-500">
+                Buscar:
+            </div>
+
+            <!-- Valor -->
+            <div class="flex-1">
+                <input type="text" name="valor" required
+                    placeholder="Escriba el valor a buscar"
+                    class="w-full h-9 rounded border border-gray-300 bg-white px-3 text-sm
+                            focus:outline-none focus:ring-1 focus:ring-blue-500">
+            </div>
+
+            <!-- Botón -->
+            <div>
+                <button type="submit"
+                        class="h-9 px-4 bg-blue-600 text-white text-sm font-semibold
+                            rounded hover:bg-blue-700 transition">
+                    Filtrar
+                </button>
+            </div>
+
+        </div>
     </form>
         <!-- Tabla que contiene los paises -->
         <table class="min-w-full border border-gray-300 text-sm text-left">

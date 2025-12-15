@@ -8,7 +8,7 @@ class PaisRepository extends IRepository{
     }
 
     async filtrarPaises(atributo,valor){
-        const filtro = { [atributo]: { $regex: valor, $options: 'i' } };  
+        const filtro = { [atributo]: {$regex: valor, $options: 'i'} };  
         return await pais.find(filtro);
     }
 
