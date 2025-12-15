@@ -8,6 +8,7 @@ class PaisRepository extends IRepository{
     }
 
     async filtrarPaises(atributo,valor){
+        // Traemos todos los paises los cuales el valor de un atributo coincida de manera cercana al valor solicitado, ignorando mayusculas y minusculas 
         const filtro = { [atributo]: {$regex: valor, $options: 'i'} };  
         return await pais.find(filtro);
     }
